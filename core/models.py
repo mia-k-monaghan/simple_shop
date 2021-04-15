@@ -3,17 +3,19 @@ from django.conf import settings
 from localflavor.us.models import USStateField,USZipCodeField
 # Create your models here.
 
-class Key(models.Model):
+class WebsiteSetting(models.Model):
     STRIPE_TEST_SECRET_KEY = 'TS'
     STRIPE_TEST_PUBLISHABLE_KEY = 'TP'
     STRIPE_LIVE_SECRET_KEY = 'LS'
     STRIPE_LIVE_PUBLISHABLE_KEY = 'LP'
+    RETURN_URL = 'RU'
 
-    name = models.CharField(max_length=255, choices=[
+    setting = models.CharField(max_length=255, unique=True,choices=[
                             (STRIPE_TEST_SECRET_KEY,'Stripe Test Secret Key'),
                             (STRIPE_TEST_PUBLISHABLE_KEY,'Stripe Test Publishable Key'),
                             (STRIPE_LIVE_SECRET_KEY,'Stripe Live Secret Key'),
                             (STRIPE_LIVE_PUBLISHABLE_KEY,'Stripe Live Publishable Key'),
+                            (RETURN_URL, 'Checkout Return URL'),
                             ])
     key = models.CharField(max_length=255)
 
